@@ -29,56 +29,56 @@ Cypress.Commands.add('token', (email, senha) => {
         url: 'login',
         body: {
             "email": email,
-            "password": senha 
+            "password": senha
         }
     }).then((response) => {
         //expect(response.status).to.equal(200)
         return response.body.authorization
     })
- })
+})
 
-Cypress.Commands.add('cadastrarProduto' , (token, produto, preco, descricao, quantidade) =>{
+Cypress.Commands.add('cadastrarProduto', (token, produto, preco, descricao, quantidade) => {
     cy.request({
-        method: 'POST', 
+        method: 'POST',
         url: 'produtos',
-        headers: {authorization: token}, 
+        headers: { authorization: token },
         body: {
             "nome": produto,
             "preco": preco,
             "descricao": descricao,
             "quantidade": quantidade
-          }, 
-          failOnStatusCode: false
+        },
+        failOnStatusCode: false
     })
- })
+})
 
 Cypress.Commands.add('users', (nome, email) => {
     cy.request({
         method: 'POST',
         url: 'usuarios',
         body: {
-            "nome" : nome,
+            "nome": nome,
             "email": email,
             "password": "1234W",
             "administrador": "true"
         },
-      failOnStatusCode: false
-    }).then((response) => {       
+        failOnStatusCode: false
+    }).then((response) => {
         return response.body.authorization
     })
 })
 
-Cypress.Commands.add('LoginInvalido', (email, senha)=>{
-        cy.request({
-            method: 'POST',
-            url: 'login',
-            body: {
-                
-                    "email": email,
-                    "password":senha               
-            },             
+Cypress.Commands.add('LoginInvalido', (email, senha) => {
+    cy.request({
+        method: 'POST',
+        url: 'login',
+        body: {
 
-    }).then((response) => {       
+            "email": email,
+            "password": senha
+        },
+
+    }).then((response) => {
         return response.body.authorization
     })
 })
