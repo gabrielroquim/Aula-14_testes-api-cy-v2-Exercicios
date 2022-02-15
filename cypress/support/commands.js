@@ -32,7 +32,7 @@ Cypress.Commands.add('token', (email, senha) => {
             "password": senha 
         }
     }).then((response) => {
-        expect(response.status).to.equal(200)
+        //expect(response.status).to.equal(200)
         return response.body.authorization
     })
  })
@@ -49,5 +49,37 @@ Cypress.Commands.add('token', (email, senha) => {
             "quantidade": quantidade
           }, 
           failOnStatusCode: false
+    })
+ })
+
+ Cypress.Commands.add('users', (nome, email) => {
+    cy.request({
+        method: 'POST',
+        url: 'usuarios',
+        body: {
+            "nome" : nome,
+            "email": email,
+            "password": "1234W",
+            "administrador": "true"
+        },
+      failOnStatusCode: false
+    }).then((response) => {       
+        return response.body.authorization
+    })
+
+    Cypress.Commands.add('LoginInvalido', (email, senha)=>{
+        cy.request({
+            method: 'POST',
+            url: 'login',
+            body: {
+                
+                    "email": email,
+                    "password":senha               
+            },
+           
+        })       
+
+    }).then((response) => {       
+        return response.body.authorization
     })
  })
