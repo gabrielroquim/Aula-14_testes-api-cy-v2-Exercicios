@@ -37,7 +37,7 @@ Cypress.Commands.add('token', (email, senha) => {
     })
  })
 
- Cypress.Commands.add('cadastrarProduto' , (token, produto, preco, descricao, quantidade) =>{
+Cypress.Commands.add('cadastrarProduto' , (token, produto, preco, descricao, quantidade) =>{
     cy.request({
         method: 'POST', 
         url: 'produtos',
@@ -52,7 +52,7 @@ Cypress.Commands.add('token', (email, senha) => {
     })
  })
 
- Cypress.Commands.add('users', (nome, email) => {
+Cypress.Commands.add('users', (nome, email) => {
     cy.request({
         method: 'POST',
         url: 'usuarios',
@@ -66,8 +66,9 @@ Cypress.Commands.add('token', (email, senha) => {
     }).then((response) => {       
         return response.body.authorization
     })
+})
 
-    Cypress.Commands.add('LoginInvalido', (email, senha)=>{
+Cypress.Commands.add('LoginInvalido', (email, senha)=>{
         cy.request({
             method: 'POST',
             url: 'login',
@@ -75,11 +76,9 @@ Cypress.Commands.add('token', (email, senha) => {
                 
                     "email": email,
                     "password":senha               
-            },
-           
-        })       
+            },             
 
     }).then((response) => {       
         return response.body.authorization
     })
- })
+})
